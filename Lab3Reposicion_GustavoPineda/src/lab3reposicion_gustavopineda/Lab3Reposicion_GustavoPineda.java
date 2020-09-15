@@ -33,6 +33,7 @@ public class Lab3Reposicion_GustavoPineda {
      * @throws java.text.ParseException
      */
     public static void main(String[] args) throws ParseException {
+        int contE=0;
         Random ran = new Random();
         ArrayList<Clientes> clientes = new ArrayList();
         ArrayList<Tiendas> tiendas = new ArrayList();
@@ -218,11 +219,10 @@ public class Lab3Reposicion_GustavoPineda {
                                                         break;
                                                     case 3:
                                                         if (!bares.isEmpty()) {
-                                                            int pos1 = 0+ran.bares;
-                                                            for (int i = 0; i < ; i++) {
-                                                                
+                                                            for (int i = 0; i < bares.size(); i++) {
+                                                                int pos2 = 0 + ran.nextInt(bares.get(i).getProductos().size());
+                                                                bares.get(i).getProductos().get(pos2).setPrecio(bares.get(i).getProductos().get(pos2).getPrecio() / 2);
                                                             }
-                                                            Comida desc = 
                                                             System.out.println(ANSI_RED + "BARES" + ANSI_RESET);
                                                             for (int i = 0; i < bares.size(); i++) {
                                                                 System.out.println((i + 1) + "-" + bares.get(i));
@@ -376,7 +376,7 @@ public class Lab3Reposicion_GustavoPineda {
                                                                         System.out.println("1. Comida");
                                                                         System.out.println("2. Bebida");
                                                                         int op = input.nextInt();
-                                                                        String tipo = "";
+                                                                        String tipo;
                                                                         while (op < 0 || op > 3) {
                                                                             System.out.println("Dato invalido vuelva a ingresarlo");
                                                                             op = input.nextInt();
@@ -414,16 +414,304 @@ public class Lab3Reposicion_GustavoPineda {
                                                                             System.out.println("Ingrese un dato valido");
                                                                             pos = input.nextInt() - 1;
                                                                         }
+                                                                        bares.get(pos).getProductos().add(c);
+                                                                        System.out.println("Producto agregado a un local exitosamente");
                                                                         break;
                                                                     case 2:
+                                                                        System.out.println("Ingrese descripcion sobre el producto");
+                                                                        String des = input.nextLine();
+                                                                        input.nextLine();
+                                                                        System.out.println("Ingrese descripcion sobre el juguete");
+                                                                        String desj = input.nextLine();
+                                                                        input.nextLine();
+                                                                        System.out.println("Ingrese nombre del juguete");
+                                                                        String nomJ = input.next();
+                                                                        System.out.println("Ingrese el precio");
+                                                                        int precioJ = input.nextInt();
+                                                                        while (precioJ < 0) {
+                                                                            System.out.println("Ingrese un dato valido");
+                                                                            precioJ = input.nextInt();
+                                                                        }
+                                                                        Juguetes j = new Juguetes(des, desj, nomJ, precioJ);
+                                                                        juguetes.add(j);
+                                                                        System.out.println("Producto Creado exitosamente");
+                                                                        System.out.println("Elija donde se vendera este producto");
+                                                                        System.out.println("1. Tienda");
+                                                                        System.out.println("2. Quiosco");
+                                                                        int opcv = input.nextInt();
+                                                                        while (opcv < 0 || opcv > 2) {
+                                                                            System.out.println("Dato invalido ingrese de nuevo");
+                                                                            opcv = input.nextInt();
+                                                                        }
+                                                                        switch (opcv) {
+                                                                            case 1:
+                                                                                for (int i = 0; i < tiendas.size(); i++) {
+                                                                                    System.out.println((i + 1) + "-" + tiendas.get(i));
+                                                                                }
+                                                                                System.out.println("Ingrese posicion de la tienda");
+                                                                                int post = input.nextInt() - 1;
+                                                                                while (post < 0 || post > tiendas.size()) {
+                                                                                    System.out.println("Ingrese un dato valido");
+                                                                                    post = input.nextInt() - 1;
+                                                                                }
+                                                                                tiendas.get(post).getLjuguetes().add(j);
+                                                                                System.out.println("Producto agregado a un local exitosamente");
+                                                                                break;
+                                                                            case 2:
+                                                                                for (int i = 0; i < quioscos.size(); i++) {
+                                                                                    System.out.println((i + 1) + "-" + quioscos.get(i));
+                                                                                }
+                                                                                System.out.println("Ingrese posicion de la tienda");
+                                                                                int posq = input.nextInt() - 1;
+                                                                                while (posq < 0 || posq > quioscos.size()) {
+                                                                                    System.out.println("Ingrese un dato valido");
+                                                                                    posq = input.nextInt() - 1;
+                                                                                }
+                                                                                quioscos.get(posq).getInventario().add(j);
+                                                                                System.out.println("Producto agregado a un local exitosamente");
+                                                                                break;
+                                                                        }
                                                                         break;
                                                                     case 3:
-                                                                        break;
+                                                                        System.out.println("Ingrese talla de la ropa");
+                                                                        System.out.println("1. S");
+                                                                        System.out.println("2. M");
+                                                                        System.out.println("3. L");
+                                                                        System.out.println("4. XL");
+                                                                        int opcionT = input.nextInt();
+                                                                        while (opcionT < 0 || opcionT > 4) {
+                                                                            System.out.println("Dato invalido ingreselo otra vez");
+                                                                            opcionT = input.nextInt();
+                                                                        }
+                                                                        String talla = "";
+                                                                        switch (opcionT) {
+                                                                            case 1:
+                                                                                talla = "S";
+                                                                                break;
+                                                                            case 2:
+                                                                                talla = "M";
+                                                                                break;
+                                                                            case 3:
+                                                                                talla = "L";
+                                                                                break;
+                                                                            case 4:
+                                                                                talla = "XL";
+                                                                                break;
+                                                                        }
+                                                                        System.out.println("Ingrese genero de la ropa");
+                                                                        System.out.println("1. Mujer");
+                                                                        System.out.println("2. Hombre");
+                                                                        int opcionG = input.nextInt();
+                                                                        while (opcionG < 0 || opcionG > 2) {
+                                                                            System.out.println("Dato invalido ingreselo otra vez");
+                                                                            opcionG = input.nextInt();
+                                                                        }
+                                                                        String genero = "";
+                                                                        switch (opcionG) {
+                                                                            case 1:
+                                                                                genero = "Mujer";
+                                                                                break;
+                                                                            case 2:
+                                                                                genero = "Hombre";
+                                                                                break;
+                                                                        }
+                                                                        System.out.println("Ingrese descripcion del producto");
+                                                                        String descR = input.nextLine();
+                                                                        input.nextLine();
+                                                                        System.out.println("Ingrese el nombre del producto");
+                                                                        String nomR = input.next();
+                                                                        System.out.println("Ingrese el precio del producto");
+                                                                        int precioR = input.nextInt();
+                                                                        while (precioR < 0) {
+                                                                            System.out.println("Dato invalido ingrese denuevo");
+                                                                            precioR = input.nextInt();
+                                                                        }
+                                                                        Ropa r = new Ropa(genero, talla, descR, nomR, precioR);
+                                                                        ropa.add(r);
+                                                                        System.out.println("Producto Creado exitosamente");
+                                                                        System.out.println("Elija donde se vendera este producto");
+                                                                        System.out.println("1. Tienda");
+                                                                        System.out.println("2. Quiosco");
+                                                                        int opcr = input.nextInt();
+                                                                        while (opcr < 0 || opcr > 2) {
+                                                                            System.out.println("Dato invalido ingrese de nuevo");
+                                                                            opcr = input.nextInt();
+                                                                        }
+                                                                        switch (opcr) {
+                                                                            case 1:
+                                                                                for (int i = 0; i < tiendas.size(); i++) {
+                                                                                    System.out.println((i + 1) + "-" + tiendas.get(i));
+                                                                                }
+                                                                                System.out.println("Ingrese posicion de la tienda");
+                                                                                int post = input.nextInt() - 1;
+                                                                                while (post < 0 || post > tiendas.size()) {
+                                                                                    System.out.println("Ingrese un dato valido");
+                                                                                    post = input.nextInt() - 1;
+                                                                                }
+                                                                                tiendas.get(post).getLropa().add(r);
+                                                                                System.out.println("Producto agregado a un local exitosamente");
+                                                                                break;
+                                                                            case 2:
+                                                                                for (int i = 0; i < quioscos.size(); i++) {
+                                                                                    System.out.println((i + 1) + "-" + quioscos.get(i));
+                                                                                }
+                                                                                System.out.println("Ingrese posicion de la tienda");
+                                                                                int posq = input.nextInt() - 1;
+                                                                                while (posq < 0 || posq > quioscos.size()) {
+                                                                                    System.out.println("Ingrese un dato valido");
+                                                                                    posq = input.nextInt() - 1;
+                                                                                }
+                                                                                quioscos.get(posq).getInventario().add(r);
+                                                                                System.out.println("Producto agregado a un local exitosamente");
+                                                                                break;
+                                                                        }
                                                                 }
                                                             }
                                                             break;
                                                         case 3:
-
+                                                            System.out.println(ANSI_BLUE + "Agregar Empleados" + ANSI_RESET);
+                                                            System.out.println("Ingrese donde quiere agregar empleado");
+                                                            System.out.println("1. Tienda");
+                                                            System.out.println("2. Quiosco");
+                                                            System.out.println("3. Bar (Solo puede tener 5 por tacaños XD)");
+                                                            int opcionE = input.nextInt();
+                                                            while (opcionE < 0 || opcionE > 3) {
+                                                                System.out.println("Dato invalido, ingrese de nuevo");
+                                                                opcionE = input.nextInt();
+                                                            }
+                                                            switch (opcionE) {
+                                                                case 1:
+                                                                    System.out.println("Ingrese Identificacion");
+                                                                    long eid = input.nextLong();
+                                                                    while (eid <= 0) {
+                                                                        System.out.println("Dato invalido");
+                                                                        eid = input.nextLong();
+                                                                    }
+                                                                    System.out.println("Ingrese horario");
+                                                                    String horario = input.nextLine();
+                                                                    input.nextLine();
+                                                                    System.out.println("Ingrese numero de ventas");
+                                                                    int numV = input.nextInt();
+                                                                    while (numV < 0) {
+                                                                        System.out.println("Ingrese un numero valido");
+                                                                        numV = input.nextInt();
+                                                                    }
+                                                                    System.out.println("Ingrese usuario");
+                                                                    String u = input.next();
+                                                                    System.out.println("Ingrese contrseña");
+                                                                    String c = input.next();
+                                                                    System.out.println("Ingrese correo");
+                                                                    String co = input.next();
+                                                                    System.out.println("Ingrese nombre completo");
+                                                                    String nombreco = input.nextLine();
+                                                                    input.nextLine();
+                                                                    System.out.println("Ingrese fecha de nacimiento en formato (dd-mm-yyyy)");
+                                                                    String dateE = input.next();
+                                                                    SimpleDateFormat dateFormat3 = new SimpleDateFormat("dd-mm-yyyy");
+                                                                    Date nacimientoE = dateFormat3.parse(dateE);
+                                                                    Empleados e = new Empleados(horario, numV, eid, u, c, co, nombreco, nacimientoE);
+                                                                    empleados.add(e);
+                                                                    for (int i = 0; i < tiendas.size(); i++) {
+                                                                        System.out.println((i + 1) + "-" + tiendas.get(i));
+                                                                    }
+                                                                    System.out.println("Ingrese posicion de la tienda");
+                                                                    int post = input.nextInt() - 1;
+                                                                    while (post < 0 || post > tiendas.size()) {
+                                                                        System.out.println("Ingrese un dato valido");
+                                                                        post = input.nextInt() - 1;
+                                                                    }
+                                                                    tiendas.get(post).getEmpleados().add(e);
+                                                                    System.out.println("Empleado agregado a una tienda exitosamente");
+                                                                    break;
+                                                                case 2:
+                                                                    System.out.println("Ingrese Identificacion");
+                                                                    long eid2 = input.nextLong();
+                                                                    while (eid2 <= 0) {
+                                                                        System.out.println("Dato invalido");
+                                                                        eid2 = input.nextLong();
+                                                                    }
+                                                                    System.out.println("Ingrese horario");
+                                                                    String horario2 = input.nextLine();
+                                                                    input.nextLine();
+                                                                    System.out.println("Ingrese numero de ventas");
+                                                                    int numV2 = input.nextInt();
+                                                                    while (numV2 < 0) {
+                                                                        System.out.println("Ingrese un numero valido");
+                                                                        numV2 = input.nextInt();
+                                                                    }
+                                                                    System.out.println("Ingrese usuario");
+                                                                    String u2 = input.next();
+                                                                    System.out.println("Ingrese contrseña");
+                                                                    String c2 = input.next();
+                                                                    System.out.println("Ingrese correo");
+                                                                    String co2 = input.next();
+                                                                    System.out.println("Ingrese nombre completo");
+                                                                    String nombreco2 = input.nextLine();
+                                                                    input.nextLine();
+                                                                    System.out.println("Ingrese fecha de nacimiento en formato (dd-mm-yyyy)");
+                                                                    String dateE2 = input.next();
+                                                                    SimpleDateFormat dateFormat4 = new SimpleDateFormat("dd-mm-yyyy");
+                                                                    Date nacimientoE2 = dateFormat4.parse(dateE2);
+                                                                    Empleados e2 = new Empleados(horario2, numV2, eid2, u2, c2, co2, nombreco2, nacimientoE2);
+                                                                    empleados.add(e2);
+                                                                    for (int i = 0; i < quioscos.size(); i++) {
+                                                                        System.out.println((i + 1) + "-" + quioscos.get(i));
+                                                                    }
+                                                                    System.out.println("Ingrese posicion del quiosco");
+                                                                    int post2 = input.nextInt() - 1;
+                                                                    while (post2 < 0 || post2 > quioscos.size()) {
+                                                                        System.out.println("Ingrese un dato valido");
+                                                                        post2 = input.nextInt() - 1;
+                                                                    }
+                                                                    quioscos.get(post2).getEmpleados().add(e2);
+                                                                    System.out.println("Empleado agregado a un quiosco exitosamente");
+                                                                    break;
+                                                                case 3:
+                                                                    if (contE <= 5) {
+                                                                        System.out.println("Ingrese Identificacion");
+                                                                        long eid3 = input.nextLong();
+                                                                        while (eid3 <= 0) {
+                                                                            System.out.println("Dato invalido");
+                                                                            eid3 = input.nextLong();
+                                                                        }
+                                                                        System.out.println("Ingrese horario");
+                                                                        String horario3 = input.nextLine();
+                                                                        input.nextLine();
+                                                                        System.out.println("Ingrese numero de ventas");
+                                                                        int numV3 = input.nextInt();
+                                                                        while (numV3 < 0) {
+                                                                            System.out.println("Ingrese un numero valido");
+                                                                            numV3 = input.nextInt();
+                                                                        }
+                                                                        System.out.println("Ingrese usuario");
+                                                                        String u3 = input.next();
+                                                                        System.out.println("Ingrese contrseña");
+                                                                        String c3 = input.next();
+                                                                        System.out.println("Ingrese correo");
+                                                                        String co3 = input.next();
+                                                                        System.out.println("Ingrese nombre completo");
+                                                                        String nombreco3 = input.nextLine();
+                                                                        input.nextLine();
+                                                                        System.out.println("Ingrese fecha de nacimiento en formato (dd-mm-yyyy)");
+                                                                        String dateE3 = input.next();
+                                                                        SimpleDateFormat dateFormat5 = new SimpleDateFormat("dd-mm-yyyy");
+                                                                        Date nacimientoE3 = dateFormat5.parse(dateE3);
+                                                                        Empleados e3 = new Empleados(horario3, numV3, eid3, u3, c3, co3, nombreco3, nacimientoE3);
+                                                                        empleados.add(e3);
+                                                                        for (int i = 0; i < bares.size(); i++) {
+                                                                            System.out.println((i + 1) + "-" + bares.get(i));
+                                                                        }
+                                                                        System.out.println("Ingrese posicion del bar");
+                                                                        int post3 = input.nextInt() - 1;
+                                                                        while (post3 < 0 || post3 > bares.size()) {
+                                                                            System.out.println("Ingrese un dato valido");
+                                                                            post3 = input.nextInt() - 1;
+                                                                        }
+                                                                        bares.get(post3).getEmpleados().add(e3);
+                                                                        System.out.println("Empleado agregado a un bar exitosamente");
+                                                                    }
+                                                                    break;
+                                                            }
                                                             break;
                                                     }
                                                 }
