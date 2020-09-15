@@ -33,7 +33,6 @@ public class Lab3Reposicion_GustavoPineda {
      * @throws java.text.ParseException
      */
     public static void main(String[] args) throws ParseException {
-        int contE=0;
         Random ran = new Random();
         ArrayList<Clientes> clientes = new ArrayList();
         ArrayList<Tiendas> tiendas = new ArrayList();
@@ -65,8 +64,34 @@ public class Lab3Reposicion_GustavoPineda {
                     input.nextLine();
                     System.out.println("Ingrese numero de identificacion");
                     long id = input.nextLong();
+                    while (id < 0) {
+                        System.out.println("Ingrese un numero valido");
+                        System.out.println("Ingrese de nuevo");
+                        id = input.nextLong();
+                    }
+                    for (int i = 0; i < clientes.size(); i++) {
+                        while (clientes.get(i).getId() == id) {
+                            System.out.println("La identificacion ya existe, cree una diferente");
+                            System.out.println("Ingrese ID nuevo");
+                            id = input.nextLong();
+                            while (id < 0) {
+                                System.out.println("Ingrese un numero valido");
+                                System.out.println("Ingrese de nuevo");
+                                id = input.nextLong();
+                            }
+                            i = 0;
+                        }
+                    }
                     System.out.println("Ingrese Usuario nuevo: ");
                     String user = input.next();
+                    for (int i = 0; i < clientes.size(); i++) {
+                        while (clientes.get(i).getUsuario().equals(user)) {
+                            System.out.println("El usuario ya existe, cree uno diferente");
+                            System.out.println("Ingrese usuario nuevo");
+                            user = input.next();
+                            i = 0;
+                        }
+                    }
                     System.out.println("Ingrese Contraseña nueva: ");
                     String contra = input.next();
                     System.out.println("Ingrese correo");
@@ -120,13 +145,14 @@ public class Lab3Reposicion_GustavoPineda {
                                         int opcion3 = 0;
                                         while (opcion3 != 6) {
                                             int opcion4 = 0;
-                                            while (opcion4 != 4) {
+                                            while (opcion4 != 5) {
                                                 System.out.println("Compras");
                                                 System.out.println("Ingrese donde quiere comprar");
                                                 System.out.println("1. Tiendas");
                                                 System.out.println("2. Quioscos");
                                                 System.out.println("3. Bares");
-                                                System.out.println("4. Salir");
+                                                System.out.println("4. Facturacion");
+                                                System.out.println("5. Salir");
                                                 opcion4 = input.nextInt();
                                                 while (opcion4 < 0 || opcion4 > 4) {
                                                     System.out.println("Dato ingresado es invalido");
@@ -249,6 +275,9 @@ public class Lab3Reposicion_GustavoPineda {
                                                         } else {
                                                             System.out.println("No hay tiendas o quioscos registrados, porfavor cree una tienda y un quiosco");
                                                         }
+                                                        break;
+                                                    case 4:
+
                                                         break;
                                                 }
                                             }
@@ -667,48 +696,50 @@ public class Lab3Reposicion_GustavoPineda {
                                                                     System.out.println("Empleado agregado a un quiosco exitosamente");
                                                                     break;
                                                                 case 3:
-                                                                    if (contE <= 5) {
-                                                                        System.out.println("Ingrese Identificacion");
-                                                                        long eid3 = input.nextLong();
-                                                                        while (eid3 <= 0) {
-                                                                            System.out.println("Dato invalido");
-                                                                            eid3 = input.nextLong();
-                                                                        }
-                                                                        System.out.println("Ingrese horario");
-                                                                        String horario3 = input.nextLine();
-                                                                        input.nextLine();
-                                                                        System.out.println("Ingrese numero de ventas");
-                                                                        int numV3 = input.nextInt();
-                                                                        while (numV3 < 0) {
-                                                                            System.out.println("Ingrese un numero valido");
-                                                                            numV3 = input.nextInt();
-                                                                        }
-                                                                        System.out.println("Ingrese usuario");
-                                                                        String u3 = input.next();
-                                                                        System.out.println("Ingrese contrseña");
-                                                                        String c3 = input.next();
-                                                                        System.out.println("Ingrese correo");
-                                                                        String co3 = input.next();
-                                                                        System.out.println("Ingrese nombre completo");
-                                                                        String nombreco3 = input.nextLine();
-                                                                        input.nextLine();
-                                                                        System.out.println("Ingrese fecha de nacimiento en formato (dd-mm-yyyy)");
-                                                                        String dateE3 = input.next();
-                                                                        SimpleDateFormat dateFormat5 = new SimpleDateFormat("dd-mm-yyyy");
-                                                                        Date nacimientoE3 = dateFormat5.parse(dateE3);
-                                                                        Empleados e3 = new Empleados(horario3, numV3, eid3, u3, c3, co3, nombreco3, nacimientoE3);
-                                                                        empleados.add(e3);
-                                                                        for (int i = 0; i < bares.size(); i++) {
-                                                                            System.out.println((i + 1) + "-" + bares.get(i));
-                                                                        }
-                                                                        System.out.println("Ingrese posicion del bar");
-                                                                        int post3 = input.nextInt() - 1;
-                                                                        while (post3 < 0 || post3 > bares.size()) {
-                                                                            System.out.println("Ingrese un dato valido");
-                                                                            post3 = input.nextInt() - 1;
-                                                                        }
+                                                                    System.out.println("Ingrese Identificacion");
+                                                                    long eid3 = input.nextLong();
+                                                                    while (eid3 <= 0) {
+                                                                        System.out.println("Dato invalido");
+                                                                        eid3 = input.nextLong();
+                                                                    }
+                                                                    System.out.println("Ingrese horario");
+                                                                    String horario3 = input.nextLine();
+                                                                    input.nextLine();
+                                                                    System.out.println("Ingrese numero de ventas");
+                                                                    int numV3 = input.nextInt();
+                                                                    while (numV3 < 0) {
+                                                                        System.out.println("Ingrese un numero valido");
+                                                                        numV3 = input.nextInt();
+                                                                    }
+                                                                    System.out.println("Ingrese usuario");
+                                                                    String u3 = input.next();
+                                                                    System.out.println("Ingrese contrseña");
+                                                                    String c3 = input.next();
+                                                                    System.out.println("Ingrese correo");
+                                                                    String co3 = input.next();
+                                                                    System.out.println("Ingrese nombre completo");
+                                                                    String nombreco3 = input.nextLine();
+                                                                    input.nextLine();
+                                                                    System.out.println("Ingrese fecha de nacimiento en formato (dd-mm-yyyy)");
+                                                                    String dateE3 = input.next();
+                                                                    SimpleDateFormat dateFormat5 = new SimpleDateFormat("dd-mm-yyyy");
+                                                                    Date nacimientoE3 = dateFormat5.parse(dateE3);
+                                                                    Empleados e3 = new Empleados(horario3, numV3, eid3, u3, c3, co3, nombreco3, nacimientoE3);
+                                                                    empleados.add(e3);
+                                                                    for (int i = 0; i < bares.size(); i++) {
+                                                                        System.out.println((i + 1) + "-" + bares.get(i));
+                                                                    }
+                                                                    System.out.println("Ingrese posicion del bar");
+                                                                    int post3 = input.nextInt() - 1;
+                                                                    while (post3 < 0 || post3 > bares.size()) {
+                                                                        System.out.println("Ingrese un dato valido");
+                                                                        post3 = input.nextInt() - 1;
+                                                                    }
+                                                                    if (bares.get(post3).getEmpleados().size() != 5) {
                                                                         bares.get(post3).getEmpleados().add(e3);
                                                                         System.out.println("Empleado agregado a un bar exitosamente");
+                                                                    } else {
+                                                                        System.out.println("El bar ya tiene 5 empleados");
                                                                     }
                                                                     break;
                                                             }
@@ -719,6 +750,20 @@ public class Lab3Reposicion_GustavoPineda {
                                             case 2:
                                                 break;
                                             case 3:
+                                                int opcionEl = 0;
+                                                while (opcionEl != 4) {
+                                                    System.out.println(ANSI_CYAN + "Menu de eliminar" + ANSI_RESET);
+                                                    System.out.println("1. Eliminar Local");
+                                                    System.out.println("2. Eliminar Producto");
+                                                    System.out.println("3. Eliminar Empleado");
+                                                    System.out.println("4. Salir");
+                                                    opcionEl = input.nextInt();
+                                                    while (opcionEl <= 0 || opcion > 4) {
+                                                        System.out.println("Valor invalido ingrese denuevo");
+                                                        opcionEl = input.nextInt();
+                                                    }
+
+                                                }
                                                 break;
                                         }
                                     }
